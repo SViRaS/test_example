@@ -1,17 +1,36 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:easy_localization/easy_localization.dart';
 
-void main() {
-  runApp(const MyApp());
+import 'package:flutter/material.dart';
+import 'package:test_example_app/generated/codegen_loader.g.dart';
+import 'package:test_example_app/generated/locale_keys.g.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await EasyLocalization.ensureInitialized();
+
+  runApp(
+    EasyLocalization(
+      supportedLocales: [const Locale('en'), const Locale('ru')],
+      path: 'assets/translations',
+      fallbackLocale: const Locale('en'),
+      assetLoader: const CodegenLoader(),
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  // This widget is the root of your application.
+  const MyApp({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      title: 'Flutter Demo',
+      localizationsDelegates: context.localizationDelegates,
+      supportedLocales: context.supportedLocales,
+      locale: context.locale,
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
       home: const MyHomePage(),
     );
   }
@@ -23,10 +42,10 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFFFFEFC),
+      backgroundColor: const Color(0xFFFFFEFC),
       body: Column(
         children: [
-          SizedBox(
+          const SizedBox(
             height: 45,
           ),
           Padding(
@@ -35,17 +54,17 @@ class MyHomePage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'Мои коды',
-                  style: TextStyle(fontSize: 24, fontFamily: 'Roboto'),
+                  LocaleKeys.my_codes.tr(),
+                  style: const TextStyle(fontSize: 24, fontFamily: 'Roboto'),
                 ),
-                Icon(
+                const Icon(
                   Icons.notifications,
                   size: 24,
-                )
+                ),
               ],
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 45,
           ),
           Padding(
@@ -60,21 +79,21 @@ class MyHomePage extends StatelessWidget {
                     child: ElevatedButton(
                       onPressed: () {},
                       child: Text(
-                        'Bce коды',
-                       style: TextStyle(
+                        LocaleKeys.all_codes.tr(),
+                        style: const TextStyle(
                             fontFamily: 'Roboto',
                             fontSize: 14,
                             fontWeight: FontWeight.w500,
                             color: Color.fromRGBO(255, 254, 252, 1)),
                       ),
                       style: ElevatedButton.styleFrom(
-                          backgroundColor: Color(0xFF211F1F),
-                          shape: RoundedRectangleBorder(
+                          backgroundColor: const Color(0xFF211F1F),
+                          shape: const RoundedRectangleBorder(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(41.14)))),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 8,
                   ),
                   SizedBox(
@@ -83,21 +102,21 @@ class MyHomePage extends StatelessWidget {
                     child: ElevatedButton(
                       onPressed: () {},
                       child: Text(
-                        'Избранное',
-                         style: TextStyle(
+                        LocaleKeys.favourites.tr(),
+                        style: const TextStyle(
                             fontFamily: 'Roboto',
                             fontSize: 14,
                             fontWeight: FontWeight.w500,
                             color: Color.fromRGBO(33, 31, 31, 1)),
                       ),
                       style: ElevatedButton.styleFrom(
-                          backgroundColor: Color(0xFFFFFEFC),
-                          shape: RoundedRectangleBorder(
+                          backgroundColor: const Color(0xFFFFFEFC),
+                          shape: const RoundedRectangleBorder(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(41.14)))),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 8,
                   ),
                   SizedBox(
@@ -106,21 +125,21 @@ class MyHomePage extends StatelessWidget {
                     child: ElevatedButton(
                       onPressed: () {},
                       child: Text(
-                        'Машина',
-                         style: TextStyle(
+                        LocaleKeys.car.tr(),
+                        style: const TextStyle(
                             fontFamily: 'Roboto',
                             fontSize: 14,
                             fontWeight: FontWeight.w500,
                             color: Color.fromRGBO(33, 31, 31, 1)),
                       ),
                       style: ElevatedButton.styleFrom(
-                          backgroundColor: Color(0xFFFFFEFC),
-                          shape: RoundedRectangleBorder(
+                          backgroundColor: const Color(0xFFFFFEFC),
+                          shape: const RoundedRectangleBorder(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(41.14)))),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 8,
                   ),
                   SizedBox(
@@ -129,16 +148,16 @@ class MyHomePage extends StatelessWidget {
                     child: ElevatedButton(
                       onPressed: () {},
                       child: Text(
-                        'Добавить',
-                        style: TextStyle(
+                        LocaleKeys.add.tr(),
+                        style: const TextStyle(
                             fontFamily: 'Roboto',
                             fontSize: 14,
                             fontWeight: FontWeight.w500,
                             color: Color.fromRGBO(33, 31, 31, 1)),
                       ),
                       style: ElevatedButton.styleFrom(
-                          backgroundColor: Color(0xFFFFFEFC),
-                          shape: RoundedRectangleBorder(
+                          backgroundColor: const Color(0xFFFFFEFC),
+                          shape: const RoundedRectangleBorder(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(41.14)))),
                     ),
@@ -147,7 +166,7 @@ class MyHomePage extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 39.43,
           ),
           Center(
@@ -156,18 +175,18 @@ class MyHomePage extends StatelessWidget {
                 Container(
                   width: 370,
                   height: 65.03,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                       color: Color.fromRGBO(67, 133, 246, 0.2),
                       borderRadius: BorderRadius.all(Radius.circular(20))),
                   child: Row(
                     children: [
-                      SizedBox(
+                      const SizedBox(
                         width: 18,
                       ),
                       Container(
                         width: 36,
                         height: 37,
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           borderRadius:
                               BorderRadius.all(Radius.circular(10.48)),
                           color: Color.fromRGBO(77, 142, 255, 1),
@@ -176,12 +195,12 @@ class MyHomePage extends StatelessWidget {
                           'assets/images/icon.png',
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 23,
                       ),
                       Text(
-                        'Моя машина',
-                        style: TextStyle(
+                        LocaleKeys.my_car.tr(),
+                        style: const TextStyle(
                             fontFamily: 'Roboto',
                             fontSize: 18,
                             fontWeight: FontWeight.w500,
@@ -193,7 +212,7 @@ class MyHomePage extends StatelessWidget {
               ],
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 14,
           ),
           Center(
@@ -202,18 +221,18 @@ class MyHomePage extends StatelessWidget {
                 Container(
                   width: 370,
                   height: 65.03,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                       color: Color.fromRGBO(205, 193, 255, 0.2),
                       borderRadius: BorderRadius.all(Radius.circular(20))),
                   child: Row(
                     children: [
-                      SizedBox(
+                      const SizedBox(
                         width: 18,
                       ),
                       Container(
                         width: 36,
                         height: 37,
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                             borderRadius:
                                 BorderRadius.all(Radius.circular(10.48)),
                             color: Color.fromRGBO(205, 193, 255, 1)),
@@ -221,21 +240,24 @@ class MyHomePage extends StatelessWidget {
                           'assets/images/icon.png',
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 23,
                       ),
-                      Text('Мой ребенок', style: TextStyle(
+                      Text(
+                        LocaleKeys.my_child.tr(),
+                        style: const TextStyle(
                             fontFamily: 'Roboto',
                             fontSize: 18,
                             fontWeight: FontWeight.w500,
-                            color: Color.fromRGBO(33, 31, 31, 1)),)
+                            color: Color.fromRGBO(33, 31, 31, 1)),
+                      )
                     ],
                   ),
                 ),
               ],
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 14,
           ),
           Center(
@@ -244,18 +266,18 @@ class MyHomePage extends StatelessWidget {
                 Container(
                   width: 370,
                   height: 65.03,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                       color: Color.fromRGBO(228, 249, 228, 1),
                       borderRadius: BorderRadius.all(Radius.circular(20))),
                   child: Row(
                     children: [
-                      SizedBox(
+                      const SizedBox(
                         width: 18,
                       ),
                       Container(
                         width: 36,
                         height: 37,
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           borderRadius:
                               BorderRadius.all(Radius.circular(10.48)),
                           color: Color.fromRGBO(122, 229, 130, 1),
@@ -264,21 +286,24 @@ class MyHomePage extends StatelessWidget {
                           'assets/images/icon.png',
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 23,
                       ),
-                      Text('Моя квартира', style: TextStyle(
+                      Text(
+                        LocaleKeys.my_flat.tr(),
+                        style: const TextStyle(
                             fontFamily: 'Roboto',
                             fontSize: 18,
                             fontWeight: FontWeight.w500,
-                            color: Color.fromRGBO(33, 31, 31, 1)),)
+                            color: Color.fromRGBO(33, 31, 31, 1)),
+                      )
                     ],
                   ),
                 ),
               ],
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 14,
           ),
           Center(
@@ -287,18 +312,18 @@ class MyHomePage extends StatelessWidget {
                 Container(
                   width: 370,
                   height: 65.03,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                       color: Color.fromRGBO(113, 187, 255, 0.2),
                       borderRadius: BorderRadius.all(Radius.circular(20))),
                   child: Row(
                     children: [
-                      SizedBox(
+                      const SizedBox(
                         width: 18,
                       ),
                       Container(
                         width: 36,
                         height: 37,
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           borderRadius:
                               BorderRadius.all(Radius.circular(10.48)),
                           color: Color.fromRGBO(129, 204, 242, 1),
@@ -307,21 +332,24 @@ class MyHomePage extends StatelessWidget {
                           'assets/images/icon.png',
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 23,
                       ),
-                      Text('Мой кошелёк', style: TextStyle(
+                      Text(
+                        LocaleKeys.my_wallet.tr(),
+                        style: const TextStyle(
                             fontFamily: 'Roboto',
                             fontSize: 18,
                             fontWeight: FontWeight.w500,
-                            color: Color.fromRGBO(33, 31, 31, 1)),)
+                            color: Color.fromRGBO(33, 31, 31, 1)),
+                      )
                     ],
                   ),
                 ),
               ],
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 14,
           ),
           Center(
@@ -330,18 +358,18 @@ class MyHomePage extends StatelessWidget {
                 Container(
                   width: 370,
                   height: 65.03,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                       color: Color.fromRGBO(119, 237, 217, 0.2),
                       borderRadius: BorderRadius.all(Radius.circular(20))),
                   child: Row(
                     children: [
-                      SizedBox(
+                      const SizedBox(
                         width: 18,
                       ),
                       Container(
                         width: 36,
                         height: 37,
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           borderRadius:
                               BorderRadius.all(Radius.circular(10.48)),
                           color: Color.fromRGBO(119, 237, 217, 1),
@@ -350,25 +378,28 @@ class MyHomePage extends StatelessWidget {
                           'assets/images/icon.png',
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 23,
                       ),
-                      Text('Мой телефон', style: TextStyle(
+                      Text(
+                        LocaleKeys.my_phone.tr(),
+                        style: const TextStyle(
                             fontFamily: 'Roboto',
                             fontSize: 18,
                             fontWeight: FontWeight.w500,
-                            color: Color.fromRGBO(33, 31, 31, 1)),)
+                            color: Color.fromRGBO(33, 31, 31, 1)),
+                      )
                     ],
                   ),
                 ),
               ],
             ),
           ),
-          Spacer(),
+          const Spacer(),
           Container(
             width: double.infinity,
             height: 100,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
                 color: Color.fromRGBO(33, 31, 31, 1),
                 borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(25),
@@ -378,10 +409,19 @@ class MyHomePage extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Icon(
-                    Icons.settings,
-                    color: Color.fromRGBO(255, 254, 252, 1),
-                    size: 30,
+                  IconButton(
+                    icon: const Icon(
+                      Icons.settings,
+                      color: Color.fromRGBO(255, 254, 252, 1),
+                      size: 30,
+                    ),
+                    onPressed: () {
+                      if (context.locale == const Locale('ru')) {
+                        context.setLocale(const Locale('en'));
+                      } else {
+                        context.setLocale(const Locale('ru'));
+                      }
+                    },
                   ),
                   SizedBox(
                     width: 136,
@@ -389,8 +429,9 @@ class MyHomePage extends StatelessWidget {
                     child: ElevatedButton(
                         onPressed: () {},
                         style: ElevatedButton.styleFrom(
-                            backgroundColor: Color.fromRGBO(205, 193, 255, 1),
-                            shape: RoundedRectangleBorder(
+                            backgroundColor:
+                                const Color.fromRGBO(205, 193, 255, 1),
+                            shape: const RoundedRectangleBorder(
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(100)))),
                         child: Row(
@@ -398,21 +439,21 @@ class MyHomePage extends StatelessWidget {
                             Image.asset(
                               'assets/images/icon.png',
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 11,
                             ),
                             Text(
-                              'Мои коды',
-                              style: TextStyle(
-                            fontFamily: 'Roboto',
-                            fontSize: 14,
-                            fontWeight: FontWeight.w500,
-                            color: Color.fromRGBO(33, 31, 31, 1)),
+                              LocaleKeys.my_codes.tr(),
+                              style: const TextStyle(
+                                  fontFamily: 'Roboto',
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w500,
+                                  color: Color.fromRGBO(33, 31, 31, 1)),
                             ),
                           ],
                         )),
                   ),
-                  Icon(
+                  const Icon(
                     Icons.person,
                     color: Color.fromRGBO(255, 254, 252, 1),
                     size: 30,
